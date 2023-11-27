@@ -1,4 +1,25 @@
-#root {
+.card-layout {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background-color: #b10f0f;
+  padding: 20px;
+  border-radius: 0.8vh;
+}
+
+/* Media query para pantallas de móvil */
+@media (max-width: 768px) {
+  .card-layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +60,4 @@
 
 .read-the-docs {
   color: #888;
-}
+} */
