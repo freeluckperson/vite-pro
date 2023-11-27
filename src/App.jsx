@@ -1,44 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
 
 
-const CardLayout = () => {
-  const cardData = [
-    { title: 'Card 1', description: 'Description for Card 1' },
-    { title: 'Card 2', description: 'Description for Card 2' },
-    { title: 'Card 3', description: 'Description for Card 3' },
-    { title: 'Card 4', description: 'Description for Card 4' },
-    { title: 'Card 5', description: 'Description for Card 5' },
-    { title: 'Card 6', description: 'Description for Card 6' },
-];
 
-  return (
-    <div className="card-layout">
-      {cardData.map((card, index) => (
-        <Card key={index} title={card.title} description={card.description} />
-      ))}
-    </div>
-  );
-};
 
-const Card = ({ title, description }) => {
-  return (
-    <div className="card">
-      <h3>{title}</h3>
-      <p>{description}</p>
-    </div>
-  );
-};
+
+
 
 function App() {
+  const [filter, setFilter] = useState(null);
+
+  useEffect(() => {
+    fetch('https://dummyjson.com/products')
+      .then(response => response.json())
+      .then(({ products }) => setFilter(products))
+      .catch(error => console.log(error.message))
+  }, [])
+
   return (
-    <div>
-      <h1>Card Layout</h1>
-      <CardLayout />
-    </div>
+    <>
+      <h1 className="text-bg-danger text-center mb-5">Card Layout</h1>
+      <div className="container">
+        <div className="row">
+          {filter?.map((product, index) => (
+            <div key={index} className="col-3 mb-4">
+              <div className="card h-100">
+                <img className="card-img-top" height={250} src={product.thumbnail} alt="..." />
+                <div className="card-body">
+                  <h5 className="card-title">{product.title.substring(0, 6)}...</h5>
+                  <p className="card-text">{product.price} $</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
+
 }
 
 export default App
