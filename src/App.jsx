@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 
 
-
-
-
-
-
 function App() {
   const [filter, setFilter] = useState(null);
 
