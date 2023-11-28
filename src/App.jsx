@@ -13,11 +13,11 @@ function App() {
 
   return (
     <>
-      <h1 className="text-bg-danger text-center mb-5">Card Layout</h1>
-      <div className="container">
+      <h1 className="text-bg-danger text-center">Card Layout</h1>
+      <div className="container-sm">
         <div className="row">
           {filter?.map((product, index) => (
-            <div key={index} className="col-3 mb-4">
+            <div key={index} className="col-md-3 mt-4">
               <div className="card h-100">
                 <img className="card-img-top" height={250} src={product.thumbnail} alt="..." />
                 <div className="card-body">
