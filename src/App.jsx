@@ -1,5 +1,43 @@
 import { useEffect, useState } from "react";
 
+// import React, { useEffect, useState } from 'react';
+
+const PokemonCards = () => {
+  const [pokemonList, setPokemonList] = useState([]);
+
+  useEffect(() => {
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=6')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.results)
+        return setPokemonList(data.results)
+      });
+  }, []);
+
+  return (
+    <>
+      {pokemonList.map(pokemon => (
+        <div className="col-md-4 mt-4" key={pokemon.name} >
+          <div className="card h-100">
+            <img
+              className="card-img-top"
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`}
+              alt={pokemon.name}
+            />
+            <div className="card-body">
+              <h3 className="card-title text-xl font-bold">{pokemon.name}</h3>
+              <p className="card-text">{pokemon.url}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </>
+  );
+};
+
+// export default PokemonCards;
+
+
 
 function App() {
   const [filter, setFilter] = useState(null);
@@ -29,6 +67,11 @@ function App() {
           ))}
         </div>
       </div>
+      <div className="container">
+        <div className="row">
+          <PokemonCards />
+        </div>
+      </div >
     </>
   );
 
